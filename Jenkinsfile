@@ -11,7 +11,7 @@ node {
         def miCompilador = docker.image('conanio/gcc46')
         
         miCompilador.pull()
-        miCompilador.inside( "-v /home/jenkins/.conan/:/home/conan/.conan/" ){
+        miCompilador.inside( "-v /home/jenkins/.conan:/home/conan/.conan" ){
             sh 'conan --version'
         }
     }
