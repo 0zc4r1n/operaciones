@@ -7,6 +7,12 @@ class Promociones(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "make"
     exports_sources = "src/*"
+    reference = "operaciones/0.1.1@0zc4r1n/stable"
+    license = "Sodimac UXPOS 1.0"
+    url = "https://github.com/0zc4r1n/operaciones"
+    description = "Libreria para operaciones basicas matematicas"
+    options = {"shared": [True, False]}
+    default_options = {"shared": False}
 #    requires = "expat/2.2.7"
 
     def build(self):
@@ -20,4 +26,4 @@ class Promociones(ConanFile):
         self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = ["promociones"]
+        self.cpp_info.libs = ["operaciones"]
