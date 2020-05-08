@@ -10,7 +10,7 @@ pipeline {
 		def commit_id
 		def resultado
 
-		stage('Preparacion'){
+		stage('Preparacion') {
 			steps {
 				checkout scm
 				sh "git rev-parse --short HEAD > .git/commit-id"
@@ -19,7 +19,7 @@ pipeline {
 			}
 		}
 
-		stage('Compilacion'){
+		stage('Compilacion') {
 			steps {
 				try {
 					sh 'conan create . uxpos/stable'
@@ -33,7 +33,7 @@ pipeline {
 			}
 		}
 
-		stage('Pruebas'){
+		stage('Pruebas') {
 			steps {
 				try {
 					sh 'conan create src/test/ uxpos/testing'
@@ -49,7 +49,7 @@ pipeline {
 			}
 		}
 
-		stage('Subida a Conan'){
+		stage('Subida a Conan') {
 			steps {
 				try {
 					sh 'conan upload operaciones/0.1.1@uxpos/stable -r=conan-repo'
@@ -61,6 +61,7 @@ pipeline {
 				}
 
 				office365ConnectorSend message: "${commit_id}: ${resultado}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+			}
 		}
 	}
 }
