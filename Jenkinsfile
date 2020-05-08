@@ -1,5 +1,6 @@
 node {
     def commit_id
+    def resultado
 
     stage('Preparacion'){
         checkout scm
@@ -9,13 +10,21 @@ node {
     }
 
     stage('Compilar'){
-        def miCompilador = docker.image('conanio/gcc46')
+	try {
+        	def miCompilador = docker.image('conanio/gcc46')
         
-        miCompilador.pull()
-        miCompilador.inside( "-v /tmp/conan/.conan:/home/conan/.conan" ){
-            sh 'conan --version'
-        }
+        	miCompilador.pull()
+        	miCompilador.inside( "-v /tmp/conan/.conan:/home/conan/.conan" ){
+            		sh 'conan --version'
+        	}
 
-	office365ConnectorSend message: "${commit_id}: resultado compilacion", status:"OK", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+		currentBuild.result = 'SUCCESS'
+		resultado = "Se genero una nueva versión de la libreria"
+	} catch( Exception err ) {
+		currentBuild.result = 'FAILURE'
+		resultado = "Se genero un error: ${err}"
+	}
+
+	office365ConnectorSend message: "${commit_id}: ${resultado}", status:"${currentBuild.result]", webhookUrl:"${DEV_UXPOS_WEBHOOK}"	
     }
 }
