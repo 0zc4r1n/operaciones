@@ -6,6 +6,10 @@ pipeline {
 		}
 	}
 
+	options {
+		skipStagesAfterUnstable() 
+	}
+
 	environment {
 		COMMIT_ID = ""
 		RESULTADO = ""
