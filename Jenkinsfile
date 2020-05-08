@@ -15,8 +15,8 @@ pipeline {
 		stage('Preparacion') {
 			steps {
 				checkout scm
-				sh "git rev-parse --short HEAD > .git/COMMIT_ID"
-				commit_id = readFile('.git/COMMIT_ID').trim()
+				sh "git rev-parse --short HEAD > .git/commit_id"
+				COMMIT_ID = readFile('.git/COMMIT_ID').trim()
 				sh "echo 'WebHook: ${DEV_UXPOS_WEBHOOK}'"
 			}
 		}
@@ -30,7 +30,7 @@ pipeline {
 					currentBuild.result = 'FAILURE'
 					RESULTADO = "Se ha generado un error: ${err} : al momento de compilar la libreria operaciones/0.1.1@uxpos/stable"
 
-					office365ConnectorSend message: "${commit_id}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+					office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
 				}
 			}
 		}
@@ -46,7 +46,7 @@ pipeline {
 					currentBuild.result = 'FAILURE'
 					RESULTADO = "Se ha generado un error: ${err} : no ha pasado las pruebas unitarias la libreria operaciones/0.1.1@uxpos/stable"
 
-					office365ConnectorSend message: "${commit_id}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+					office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
 				}
 			}
 		}
@@ -62,7 +62,7 @@ pipeline {
 					RESULTADO = "Se ha generado un error: ${err} : al momento de subir libreria operaciones/0.1.1@uxpos/stable a conan-repo"
 				}
 
-				office365ConnectorSend message: "${commit_id}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+				office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
 			}
 		}
 	}
