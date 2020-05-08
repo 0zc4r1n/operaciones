@@ -18,7 +18,6 @@ node {
 				sh 'conan create . uxpos/stable'
 			}
 
-			currentBuild.result = 'SUCCESS'
 			resultado = "Se ha compilado localmente la libreria operaciones/0.1.1@uxpos/stable"
 		} catch( Exception err ) {
 			currentBuild.result = 'FAILURE'
@@ -38,7 +37,6 @@ node {
 				sh 'build/bin/test'
 			}
 
-			currentBuild.result = 'SUCCESS'
 			resultado = "Se ha actualizado la libreria operaciones/0.1.1@uxpos/stable"
 		} catch( Exception err ) {
 			currentBuild.result = 'FAILURE'
@@ -56,8 +54,8 @@ node {
 				sh 'conan upload operaciones/0.1.1@uxpos/stable -r=conan-repo'
 			}
 
-			currentBuild.result = 'SUCCESS'
 			resultado = "Se ha actualizado la libreria operaciones/0.1.1@uxpos/stable en conan-repo"
+			currentBuild.result = 'SUCCESS'
 		} catch( Exception err ) {
 			currentBuild.result = 'FAILURE'
 			resultado = "Se ha generado un error: ${err} : al momento de subir libreria operaciones/0.1.1@uxpos/stable a conan-repo"

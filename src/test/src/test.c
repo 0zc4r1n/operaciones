@@ -94,4 +94,6 @@ int main(int args, char **argv)
 	printf( "Test 12 [%d]\n", resultado );
 	if( !resultado )
 		return resultado;
+
+	return 1;
 }
