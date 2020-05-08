@@ -21,10 +21,10 @@ node {
         	}
 
 		currentBuild.result = 'SUCCESS'
-		resultado = "Se genero una nueva versión de la libreria"
+		resultado = "Se ha actualizado la libreria operaciones/0.1.1@uxpos/stable"
 	} catch( Exception err ) {
 		currentBuild.result = 'FAILURE'
-		resultado = "Se genero un error: ${err}"
+		resultado = "Se ha generado un error: ${err} : al momento de crear la libreria operaciones/0.1.1@uxpos/stable"
 	}
 
 	office365ConnectorSend message: "${commit_id}: ${resultado}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"	
