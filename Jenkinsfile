@@ -9,13 +9,15 @@ node {
 	sh "echo 'WebHook: ${DEV_UXPOS_WEBHOOK}'"
     }
 
-    stage('Compilar'){
+    stage('Creacion y subida a Conan-Repo'){
 	try {
         	def miCompilador = docker.image('conanio/gcc46')
         
         	miCompilador.pull()
         	miCompilador.inside( "-v /tmp/conan/.conan:/home/conan/.conan" ){
             		sh 'conan --version'
+			sh 'conan create . uxpos/stable'
+			sh 'conan upload operaciones/0.1.1@uxpos/stable'
         	}
 
 		currentBuild.result = 'SUCCESS'
