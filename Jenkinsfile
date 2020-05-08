@@ -41,32 +41,36 @@ pipeline {
 
 		stage('Pruebas') {
 			steps {
-				try {
-					sh 'conan create src/test/ uxpos/testing'
-					sh 'mkdir build && cd build && conan install TestOperaciones/0.1.1@uxpos/testing'
-					sh 'build/bin/test'
-					RESULTADO = "Se ha actualizado la libreria operaciones/0.1.1@uxpos/stable"
-				} catch( Exception err ) {
-					currentBuild.result = 'FAILURE'
-					RESULTADO = "Se ha generado un error: ${err} : no ha pasado las pruebas unitarias la libreria operaciones/0.1.1@uxpos/stable"
+				script {
+					try {
+						sh 'conan create src/test/ uxpos/testing'
+						sh 'mkdir build && cd build && conan install TestOperaciones/0.1.1@uxpos/testing'
+						sh 'build/bin/test'
+						RESULTADO = "Se ha actualizado la libreria operaciones/0.1.1@uxpos/stable"
+					} catch( Exception err ) {
+						currentBuild.result = 'FAILURE'
+						RESULTADO = "Se ha generado un error: ${err} : no ha pasado las pruebas unitarias la libreria operaciones/0.1.1@uxpos/stable"
 
-					office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+						office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+					}
 				}
 			}
 		}
 
 		stage('Subida a Conan') {
 			steps {
-				try {
-					sh 'conan upload operaciones/0.1.1@uxpos/stable -r=conan-repo'
-					RESULTADO = "Se ha actualizado la libreria operaciones/0.1.1@uxpos/stable en conan-repo"
-					currentBuild.result = 'SUCCESS'
-				} catch( Exception err ) {
-					currentBuild.result = 'FAILURE'
-					RESULTADO = "Se ha generado un error: ${err} : al momento de subir libreria operaciones/0.1.1@uxpos/stable a conan-repo"
-				}
+				script {
+					try {
+						sh 'conan upload operaciones/0.1.1@uxpos/stable -r=conan-repo'
+						RESULTADO = "Se ha actualizado la libreria operaciones/0.1.1@uxpos/stable en conan-repo"
+						currentBuild.result = 'SUCCESS'
+					} catch( Exception err ) {
+						currentBuild.result = 'FAILURE'
+						RESULTADO = "Se ha generado un error: ${err} : al momento de subir libreria operaciones/0.1.1@uxpos/stable a conan-repo"
+					}
 
-				office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+					office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+				}
 			}
 		}
 	}
