@@ -25,6 +25,6 @@ node {
 		resultado = "Se genero un error: ${err}"
 	}
 
-	office365ConnectorSend message: "${commit_id}: ${resultado}", status:"${currentBuild.result]", webhookUrl:"${DEV_UXPOS_WEBHOOK}"	
+	office365ConnectorSend message: "${commit_id}: ${resultado}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"	
     }
 }
