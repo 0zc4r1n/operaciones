@@ -37,15 +37,13 @@ pipeline {
 						RESULTADO = "Se ha generado un error: ${err} : al momento de compilar la libreria operaciones/0.1.1@uxpos/stable"
 
 						office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+						sh 'exit 1'
 					}
 				}
 			}
 		}
 
 		stage('Pruebas') {
-			when {
-				branch "master"
-			}
 			steps {
 				script {
 					try {
@@ -58,15 +56,13 @@ pipeline {
 						RESULTADO = "Se ha generado un error: ${err} : no ha pasado las pruebas unitarias la libreria operaciones/0.1.1@uxpos/stable"
 
 						office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+						sh 'exit 1'
 					}
 				}
 			}
 		}
 
 		stage('Subida a Conan') {
-			when {
-				branch "master"
-			}
 			steps {
 				script {
 					try {
@@ -79,6 +75,19 @@ pipeline {
 					}
 
 					office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+				}
+			}
+		}
+
+		stage('Limpieza') {
+			steps {
+				script {
+					try {
+						sh 'rm -rf build bin'
+						RESULTADO = "Se eliminaron correctamente las carpetas temporales"
+					} catch( Exception err ) {
+						RESULTADO = "Se ha generado un error: ${err} : al momento de subir libreria operaciones/0.1.1@uxpos/stable a conan-repo"
+					}
 				}
 			}
 		}
