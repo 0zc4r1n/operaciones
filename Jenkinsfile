@@ -9,7 +9,7 @@ node {
 		sh "echo 'WebHook: ${DEV_UXPOS_WEBHOOK}'"
 	}
 
-	stage('Creacion'){
+	stage('Compilacion'){
 		try {
 			def miCompilador = docker.image('conanio/gcc46')
 
@@ -19,10 +19,10 @@ node {
 			}
 
 			currentBuild.result = 'SUCCESS'
-			resultado = "Se ha actualizado la libreria operaciones/0.1.1@uxpos/stable"
+			resultado = "Se ha compilado localmente la libreria operaciones/0.1.1@uxpos/stable"
 		} catch( Exception err ) {
 			currentBuild.result = 'FAILURE'
-			resultado = "Se ha generado un error: ${err} : al momento de crear la libreria operaciones/0.1.1@uxpos/stable"
+			resultado = "Se ha generado un error: ${err} : al momento de compilar la libreria operaciones/0.1.1@uxpos/stable"
 			office365ConnectorSend message: "${commit_id}: ${resultado}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"	
 		}
 	}
@@ -33,9 +33,9 @@ node {
 
 			miCompilador.pull()
 			miCompilador.inside( "-v /tmp/conan/.conan:/home/conan/.conan" ){
-				sh 'conan create test/ uxpos/testing'
-				sh 'conan install TestOperaciones/0.1.1@uxpos/testing'
-				sh 'bin/test'
+				sh 'conan create src/test/ uxpos/testing'
+				sh 'mkdir build && cd build && conan install TestOperaciones/0.1.1@uxpos/testing'
+				sh 'build/bin/test'
 			}
 
 			currentBuild.result = 'SUCCESS'

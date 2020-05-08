@@ -1,0 +1,21 @@
+{
+ "profile_host": "[settings]\narch=x86_64\narch_build=x86_64\nbuild_type=Release\ncompiler=gcc\ncompiler.libcxx=libstdc++11\ncompiler.version=7\nos=Linux\nos_build=Linux\n[options]\n[build_requires]\n[env]\n",
+ "graph_lock": {
+  "nodes": {
+   "0": {
+    "pref": "TestOperaciones/0.1.1@uxpos/stable:85dc582bd09d78611d02d99fa071650b9b897bf2",
+    "options": "shared=False\noperaciones:shared=False",
+    "requires": [
+     "1"
+    ],
+    "path": "/home/odperez/disco/ejemplo_cicd/operaciones/test/conanfile.py"
+   },
+   "1": {
+    "pref": "operaciones/0.1.1@uxpos/stable#cea41cb79255db2fb3d46e0b06a963aa:9bfdcfa2bb925892ecf42e2a018a3f3529826676#ab0f4c3f8b156545e1a79658aeb4f3fd",
+    "options": "shared=False",
+    "modified": "built"
+   }
+  }
+ },
+ "version": "0.3"
+}

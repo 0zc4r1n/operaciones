@@ -1,0 +1,102 @@
+#-------------------------------------------------------------------#
+#             Makefile variables from Conan Dependencies            #
+#-------------------------------------------------------------------#
+
+CONAN_ROOT_OPERACIONES ?=  \
+/tmp/conan/.conan/data/operaciones/0.1.1/uxpos/stable/package/9bfdcfa2bb925892ecf42e2a018a3f3529826676
+
+CONAN_SYSROOT_OPERACIONES ?=  \
+
+
+CONAN_INCLUDE_DIRS_OPERACIONES +=  \
+/tmp/conan/.conan/data/operaciones/0.1.1/uxpos/stable/package/9bfdcfa2bb925892ecf42e2a018a3f3529826676/include
+
+CONAN_LIB_DIRS_OPERACIONES +=  \
+/tmp/conan/.conan/data/operaciones/0.1.1/uxpos/stable/package/9bfdcfa2bb925892ecf42e2a018a3f3529826676/lib
+
+CONAN_BIN_DIRS_OPERACIONES +=  \
+
+
+CONAN_BUILD_DIRS_OPERACIONES +=  \
+/tmp/conan/.conan/data/operaciones/0.1.1/uxpos/stable/package/9bfdcfa2bb925892ecf42e2a018a3f3529826676/
+
+CONAN_RES_DIRS_OPERACIONES +=  \
+
+
+CONAN_LIBS_OPERACIONES +=  \
+operaciones
+
+CONAN_SYSTEM_LIBS_OPERACIONES +=  \
+
+
+CONAN_DEFINES_OPERACIONES +=  \
+
+
+CONAN_CFLAGS_OPERACIONES +=  \
+
+
+CONAN_CXXFLAGS_OPERACIONES +=  \
+
+
+CONAN_SHAREDLINKFLAGS_OPERACIONES +=  \
+
+
+CONAN_EXELINKFLAGS_OPERACIONES +=  \
+
+
+CONAN_FRAMEWORKS_OPERACIONES +=  \
+
+
+CONAN_FRAMEWORK_PATHS_OPERACIONES +=  \
+
+
+CONAN_ROOTPATH +=  \
+$(CONAN_ROOTPATH_OPERACIONES)
+
+CONAN_SYSROOT +=  \
+$(CONAN_SYSROOT_OPERACIONES)
+
+CONAN_INCLUDE_DIRS +=  \
+$(CONAN_INCLUDE_DIRS_OPERACIONES)
+
+CONAN_LIB_DIRS +=  \
+$(CONAN_LIB_DIRS_OPERACIONES)
+
+CONAN_BIN_DIRS +=  \
+$(CONAN_BIN_DIRS_OPERACIONES)
+
+CONAN_BUILD_DIRS +=  \
+$(CONAN_BUILD_DIRS_OPERACIONES)
+
+CONAN_RES_DIRS +=  \
+$(CONAN_RES_DIRS_OPERACIONES)
+
+CONAN_LIBS +=  \
+$(CONAN_LIBS_OPERACIONES)
+
+CONAN_DEFINES +=  \
+$(CONAN_DEFINES_OPERACIONES)
+
+CONAN_CFLAGS +=  \
+$(CONAN_CFLAGS_OPERACIONES)
+
+CONAN_CXXFLAGS +=  \
+$(CONAN_CXXFLAGS_OPERACIONES)
+
+CONAN_SHAREDLINKFLAGS +=  \
+$(CONAN_SHAREDLINKFLAGS_OPERACIONES)
+
+CONAN_EXELINKFLAGS +=  \
+$(CONAN_EXELINKFLAGS_OPERACIONES)
+
+CONAN_FRAMEWORKS +=  \
+$(CONAN_FRAMEWORKS_OPERACIONES)
+
+CONAN_FRAMEWORK_PATHS +=  \
+$(CONAN_FRAMEWORK_PATHS_OPERACIONES)
+
+CONAN_SYSTEM_LIBS +=  \
+$(CONAN_SYSTEM_LIBS_OPERACIONES)
+
+#-------------------------------------------------------------------#
+

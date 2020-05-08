@@ -1,0 +1,34 @@
+[settings]
+    arch=x86_64
+    build_type=Release
+    compiler=gcc
+    compiler.libcxx=libstdc++11
+    compiler.version=7
+    os=Linux
+
+[requires]
+    operaciones/0.1.1
+
+[options]
+    shared=False
+
+[full_settings]
+    arch=x86_64
+    build_type=Release
+    compiler=gcc
+    compiler.libcxx=libstdc++11
+    compiler.version=7
+    os=Linux
+
+[full_requires]
+    operaciones/0.1.1@uxpos/stable:9bfdcfa2bb925892ecf42e2a018a3f3529826676
+
+[full_options]
+    shared=False
+    operaciones:shared=False
+
+[recipe_hash]
+
+
+[env]
+
