@@ -17,7 +17,7 @@ node {
         	miCompilador.inside( "-v /tmp/conan/.conan:/home/conan/.conan" ){
             		sh 'conan --version'
 			sh 'conan create . uxpos/stable'
-			sh 'conan upload operaciones/0.1.1@uxpos/stable'
+			sh 'conan upload operaciones/0.1.1@uxpos/stable -r=conan-repo'
         	}
 
 		currentBuild.result = 'SUCCESS'
