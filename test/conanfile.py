@@ -1,29 +1,28 @@
 from conans import ConanFile, AutoToolsBuildEnvironment
 from conans import tools
 
-class Operaciones(ConanFile):
-    name = "operaciones"
+class TestOperaciones(ConanFile):
+    name = "TestOperaciones"
     version = "0.1.1"
     settings = "os", "compiler", "build_type", "arch"
     generators = "make"
     exports_sources = "src/*"
-    reference = "operaciones/0.1.1@0zc4r1n/stable"
+    reference = "operaciones/0.1.1@uxpos/testing"
     license = "Sodimac UXPOS 1.0"
     url = "https://github.com/0zc4r1n/operaciones"
     description = "Libreria para operaciones basicas matematicas"
     options = {"shared": [True, False]}
     default_options = {"shared": False}
-#    requires = "expat/2.2.7"
+    requires = "operaciones/0.1.1@uxpos/stable"
 
     def build(self):
         with tools.chdir("src"):
             atools = AutoToolsBuildEnvironment(self)
-            # atools.configure() # use it to run "./configure" if using autotools
             atools.make()
 
     def package(self):
-        self.copy("*.h", dst="include", src="src")
-        self.copy("*.a", dst="lib", keep_path=False)
+        self.copy("*test", dst="bin", keep_path=False)
 
-    def package_info(self):
-        self.cpp_info.libs = ["operaciones"]
+    def deploy(self):
+        self.copy("*", src="bin", dst="bin")
+
