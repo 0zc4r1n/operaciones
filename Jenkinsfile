@@ -6,10 +6,12 @@ pipeline {
 		}
 	}
 
-	stages{
-		def commit_id
-		def resultado
+	environment {
+		commit_id = ""
+		resultado = ""
+	}
 
+	stages{
 		stage('Preparacion') {
 			steps {
 				checkout scm
