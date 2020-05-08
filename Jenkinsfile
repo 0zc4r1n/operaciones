@@ -15,5 +15,7 @@ node {
         miCompilador.inside( "-v /tmp/conan/.conan:/home/conan/.conan" ){
             sh 'conan --version'
         }
+
+	    office365ConnectorSend message: "${commit_id}: resultado compilacion", status:"OK", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
     }
 }
