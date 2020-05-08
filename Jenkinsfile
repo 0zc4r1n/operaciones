@@ -16,6 +16,6 @@ node {
             sh 'conan --version'
         }
 
-	    office365ConnectorSend message: "${commit_id}: resultado compilacion", status:"OK", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
+	office365ConnectorSend message: "${commit_id}: resultado compilacion", status:"OK", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
     }
 }
