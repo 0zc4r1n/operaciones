@@ -43,7 +43,7 @@ int main(int args, char **argv)
 	if( resultado )
 		return resultado;
 //-------------------------------------------------
-	resultado = prueba_sumar( -12.0, 25.0, 13.0 );
+	resultado = prueba_sumar( -12.0, 25.0, 12.0 );
 	printf( "Test 3  [%d] %s\n", resultado, resultado?"Falló":"Ok" );
 	if( resultado )
 		return resultado;
