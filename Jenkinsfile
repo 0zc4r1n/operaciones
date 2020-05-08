@@ -22,7 +22,6 @@ pipeline {
 					checkout scm
 					sh "git rev-parse --short HEAD > .git/commit_id"
 					COMMIT_ID = readFile('.git/commit_id').trim()
-					sh "echo 'WebHook: ${DEV_UXPOS_WEBHOOK}'"
 				}
 			}
 		}
@@ -44,6 +43,9 @@ pipeline {
 		}
 
 		stage('Pruebas') {
+			when {
+				branch "master"
+			}
 			steps {
 				script {
 					try {
@@ -62,6 +64,9 @@ pipeline {
 		}
 
 		stage('Subida a Conan') {
+			when {
+				branch "master"
+			}
 			steps {
 				script {
 					try {
