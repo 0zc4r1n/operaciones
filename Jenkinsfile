@@ -19,9 +19,6 @@ pipeline {
 		stage('Preparacion') {
 			steps {
 				script {
-					env.currentBuild.displayName = "operaciones"
-					env.currentBuild.description = "Libraria de operaciones basicas matematicas"
-
 					checkout scm
 					sh "git rev-parse --short HEAD > .git/commit_id"
 					COMMIT_ID = readFile('.git/commit_id').trim()
