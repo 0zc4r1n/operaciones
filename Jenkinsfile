@@ -84,6 +84,8 @@ pipeline {
 				script {
 					try {
 						sh 'rm -rf build bin'
+						sh 'conan remove "*" -f'
+
 						RESULTADO = "Se eliminaron correctamente las carpetas temporales"
 					} catch( Exception err ) {
 						RESULTADO = "Se ha generado un error: ${err} : al momento de subir libreria operaciones/0.1.1@uxpos/stable a conan-repo"
