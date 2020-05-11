@@ -1,7 +1,7 @@
 pipeline {
 	agent {
 		docker {
-			image 'conanio/gcc46'
+			image 'conanio/gcc7'
 			args '-v /tmp/conan/.conan:/home/conan/.conan'
 		}
 	}
