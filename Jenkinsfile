@@ -66,7 +66,7 @@ pipeline {
 			steps {
 				script {
 					try {
-						sh 'conan upload operaciones/0.1.1@uxpos/stable -r=conan-repo'
+						sh 'conan upload operaciones/0.1.1@uxpos/stable -r=conan-repo --all'
 						RESULTADO = "Se ha actualizado la libreria operaciones/0.1.1@uxpos/stable en conan-repo"
 						currentBuild.result = 'SUCCESS'
 					} catch( Exception err ) {
