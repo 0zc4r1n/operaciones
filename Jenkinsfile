@@ -13,6 +13,8 @@ pipeline {
 	environment {
 		COMMIT_ID = ""
 		RESULTADO = ""
+		env.currentBuild.displayName = "operaciones"
+		env.currentBuild.description = "Libraria de operaciones basicas matematicas"
 	}
 
 	stages{
