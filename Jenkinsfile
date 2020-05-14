@@ -53,7 +53,7 @@ pipeline {
 				script {
 					try {
 						sh 'conan create src/test/ test${USER}/testing'
-						sh 'mkdir build && cd build && conan install test${ARTIFACT}/${VERSION}@{USER}/testing'
+						sh 'mkdir build && cd build && conan install test${ARTIFACT}/${VERSION}@${USER}/testing'
 						sh 'build/bin/test'
 						RESULTADO = "Se han realizado las pruebas unitarias de ${ARTIFACT}/${VERSION}@${USER}/{RELEASE}"
 					} catch( Exception err ) {
