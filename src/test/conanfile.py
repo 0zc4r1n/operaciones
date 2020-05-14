@@ -13,7 +13,7 @@ class TestOperaciones(ConanFile):
     description = "Libreria para operaciones basicas matematicas"
     options = {"shared": [True, False]}
     default_options = {"shared": False}
-    requires = "operaciones/0.1.2@uxpos/stable"
+    requires = "operaciones/0.1.2@uxpos/develop"
 
     def build(self):
         with tools.chdir("src"):
