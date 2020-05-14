@@ -2,12 +2,12 @@ from conans import ConanFile, AutoToolsBuildEnvironment
 from conans import tools
 
 class TestOperaciones(ConanFile):
-    name = "operaciones"
+    name = "testoperaciones"
     version = "0.1.2"
     settings = "os", "compiler", "build_type", "arch"
     generators = "make"
     exports_sources = "src/*"
-    reference = "operaciones/0.1.2@uxpos/testing"
+    reference = "testoperaciones/0.1.2@uxpos/testing"
     license = "Sodimac UXPOS 1.0"
     url = "https://github.com/0zc4r1n/operaciones"
     description = "Libreria para operaciones basicas matematicas"

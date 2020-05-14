@@ -52,10 +52,10 @@ pipeline {
 			steps {
 				script {
 					try {
-						sh 'conan create src/test/ ${USER}/testing'
-						sh 'mkdir build && cd build && conan install ${ARTIFACT}/${VERSION}@{USER}/testing'
+						sh 'conan create src/test/ test${USER}/testing'
+						sh 'mkdir build && cd build && conan install test${ARTIFACT}/${VERSION}@{USER}/testing'
 						sh 'build/bin/test'
-						RESULTADO = "Se ha actualizado la libreria ${ARTIFACT}/${VERSION}@${USER}/{RELEASE}"
+						RESULTADO = "Se han realizado las pruebas unitarias de ${ARTIFACT}/${VERSION}@${USER}/{RELEASE}"
 					} catch( Exception err ) {
 						currentBuild.result = 'FAILURE'
 						RESULTADO = "Se ha generado un error: ${err} : No ha pasado las pruebas unitarias ${ARTIFACT}/${VERSION}@${USER}/${RELEASE}"
