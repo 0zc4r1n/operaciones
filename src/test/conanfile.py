@@ -2,7 +2,7 @@ from conans import ConanFile, AutoToolsBuildEnvironment
 from conans import tools
 
 class TestOperaciones(ConanFile):
-    name = "TestOperaciones"
+    name = "operaciones"
     version = "0.1.1"
     settings = "os", "compiler", "build_type", "arch"
     generators = "make"

@@ -48,7 +48,7 @@ pipeline {
 				script {
 					try {
 						sh 'conan create src/test/ uxpos/testing'
-						sh 'mkdir build && cd build && conan install TestOperaciones/0.1.1@uxpos/testing'
+						sh 'mkdir build && cd build && conan install operaciones/0.1.1@uxpos/testing'
 						sh 'build/bin/test'
 						RESULTADO = "Se ha actualizado la libreria operaciones/0.1.1@uxpos/stable"
 					} catch( Exception err ) {
