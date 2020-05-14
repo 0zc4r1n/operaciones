@@ -3,11 +3,11 @@ from conans import tools
 
 class Operaciones(ConanFile):
     name = "operaciones"
-    version = "0.1.1"
+    version = "0.1.2"
     settings = "os", "compiler", "build_type", "arch"
     generators = "make"
     exports_sources = "src/*"
-    reference = "operaciones/0.1.1@0zc4r1n/stable"
+    reference = "operaciones/0.1.2@uxpos/develop"
     license = "Sodimac UXPOS 1.0"
     url = "https://github.com/0zc4r1n/operaciones"
     description = "Libreria para operaciones basicas matematicas"

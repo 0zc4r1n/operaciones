@@ -13,6 +13,11 @@ pipeline {
 	environment {
 		COMMIT_ID = ""
 		RESULTADO = ""
+
+		VERSION = "0.1.2"
+		RELEASE = "develop"
+		ARTIFACT = "operaciones"
+		USER = "uxpos"
 	}
 
 	stages{
@@ -30,11 +35,11 @@ pipeline {
 			steps {
 				script {
 					try {
-						sh 'conan create . uxpos/stable'
-						RESULTADO = "Se ha compilado localmente la libreria operaciones/0.1.1@uxpos/stable"
+						sh "conan create . ${USER}/${RELEASE}"
+						RESULTADO = "Se ha compilado localmente la libreria ${ARTIFACT}/${VERSION}@${USER}/${RELEASE}"
 					} catch( Exception err ) {
 						currentBuild.result = 'FAILURE'
-						RESULTADO = "Se ha generado un error: ${err} : al momento de compilar la libreria operaciones/0.1.1@uxpos/stable"
+						RESULTADO = "Se ha generado un error: ${err} : al momento de compilar ${ARTIFACT}/${VERSION}@${USER}/${RELEASE}"
 
 						office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
 						sh 'exit 1'
@@ -47,13 +52,13 @@ pipeline {
 			steps {
 				script {
 					try {
-						sh 'conan create src/test/ uxpos/testing'
-						sh 'mkdir build && cd build && conan install operaciones/0.1.1@uxpos/testing'
+						sh 'conan create src/test/ ${USER}/testing'
+						sh 'mkdir build && cd build && conan install ${ARTIFACT}/${VERSION}@{USER}/testing'
 						sh 'build/bin/test'
-						RESULTADO = "Se ha actualizado la libreria operaciones/0.1.1@uxpos/stable"
+						RESULTADO = "Se ha actualizado la libreria ${ARTIFACT}/${VERSION}@${USER}/{RELEASE}"
 					} catch( Exception err ) {
 						currentBuild.result = 'FAILURE'
-						RESULTADO = "Se ha generado un error: ${err} : no ha pasado las pruebas unitarias la libreria operaciones/0.1.1@uxpos/stable"
+						RESULTADO = "Se ha generado un error: ${err} : No ha pasado las pruebas unitarias ${ARTIFACT}/${VERSION}@${USER}/${RELEASE}"
 
 						office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
 						sh 'exit 1'
@@ -62,16 +67,16 @@ pipeline {
 			}
 		}
 
-		stage('Subida a Conan') {
+		stage('Subida a Repositorio') {
 			steps {
 				script {
 					try {
-						sh 'conan upload operaciones/0.1.1@uxpos/stable -r=conan-repo --all'
-						RESULTADO = "Se ha actualizado la libreria operaciones/0.1.1@uxpos/stable en conan-repo"
+						sh 'conan upload ${ARTIFACT}/${VERSION}@${USER}/${RELEASE} -r=conan-repo --all'
+						RESULTADO = "Se ha actualizado ${ARTIFACT}/${VERSION}@${USER}/${RELEASE} en repositorio conan-repo."
 						currentBuild.result = 'SUCCESS'
 					} catch( Exception err ) {
 						currentBuild.result = 'FAILURE'
-						RESULTADO = "Se ha generado un error: ${err} : al momento de subir libreria operaciones/0.1.1@uxpos/stable a conan-repo"
+						RESULTADO = "Se ha generado un error: ${err} : al momento de subir ${ARTIFACT}/${VERSION}@${USER}/${RELEASE} al repositorio conan-repo."
 					}
 
 					office365ConnectorSend message: "${COMMIT_ID}: ${RESULTADO}", status:"${currentBuild.result}", webhookUrl:"${DEV_UXPOS_WEBHOOK}"
@@ -82,14 +87,8 @@ pipeline {
 		stage('Limpieza') {
 			steps {
 				script {
-					try {
-						sh 'rm -rf build bin'
-						sh 'conan remove "*" -f'
-
-						RESULTADO = "Se eliminaron correctamente las carpetas temporales"
-					} catch( Exception err ) {
-						RESULTADO = "Se ha generado un error: ${err} : al momento de subir libreria operaciones/0.1.1@uxpos/stable a conan-repo"
-					}
+					sh 'rm -rf build bin'
+					sh 'conan remove "*" -f'
 				}
 			}
 		}
